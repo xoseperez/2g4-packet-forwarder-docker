@@ -1,0 +1,47 @@
+version: '2'
+
+services:
+
+  2g4-packet-forwarder:
+    
+    # use pre-defined image
+    image: xoseperez/2g4-packet-forwarder:latest
+    # or comment out image: and build it yourself / with balena services
+    #build:
+    #  context: .
+    #  args:
+    #    ARCH: rpi
+
+    container_name: 2g4-packet-forwarder
+    restart: unless-stopped
+    privileged: true
+    network_mode: host      # required to read main interface MAC instead of virtual one, 
+                            # you don't need this if you set the GATEWAY_EUI manually
+    
+    #volumes:
+    #  - ./global_conf.json:/app/global_conf.json:ro
+    
+    #environment:
+      
+      # If you have the concentrator connected to a different port you can define it this way
+      # DEVICE: "/dev/ttyACM0"
+
+      # The service will define the Gateway EUI based on a network interface: eth0, wlan0 or usb0.
+      # If neither of these exist or you want it to use a different interface you can define the NIC this way:
+      #GATEWAY_EUI_NIC: "eth0"
+
+      # You can also set a custom Gateway EUI (8 bytes in hex format)
+      #GATEWAY_EUI: "1122334455667788"
+
+      # The default LNS server is the European TTN server. 
+      # If you still want to use TTN but a different region you can set it this way:
+      #TTN_REGION: "eu1"
+
+      # Or you can set a completely different LNS server.
+      #SERVER_HOST: eu1.cloud.thethings.network
+      #SERVER_PORT: 1700
+
+      # If you want the gateway to report a specific lat/lon/alt you can set them this way:
+      #GPS_LATITUDE: 41.42
+      #GPS_LONGITUDE: 2.12
+      #GPS_ALTITUDE: 0
