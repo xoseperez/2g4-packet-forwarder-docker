@@ -80,7 +80,7 @@ docker-compose --version
 
 ### Via docker-compose
 
-You can use the `docker-compose.yml` file below to configure and run your instance of UDP Packet Forwarder:
+You can use the `docker-compose.yml` file below to configure and run your instance of UDP Packet Forwarder for 2.4GHz LoRa Gateway:
 
 ```
 version: '2.0'
@@ -91,11 +91,26 @@ services:
     image: xoseperez/2g4-packet-forwarder:latest
     container_name: 2g4-packet-forwarder
     restart: unless-stopped
-    privileged: true
-    network_mode: host
+    devices:
+      - /dev/ttyACM0
 ```
 
-You can add environment variables to match your setup (see the `Service Variables` section below). 
+By default, the service will try to connect to `/dev/ttyACM0`. If your concentrator is in a different port you can either mount the right one and use the `DEVICE` variable to tell the service where it is, or map the port to the `/dev/ttyACM0` inside the container, like this:
+
+```
+version: '2.0'
+
+services:
+
+  2g4-packet-forwarder:
+    image: xoseperez/2g4-packet-forwarder:latest
+    container_name: 2g4-packet-forwarder
+    restart: unless-stopped
+    devices:
+      - /dev/ttyUSB0:/dev/ttyACM0
+```
+
+Check the existing environment variables to match your setup (see the `Service Variables` section below). 
 
 ### Build the image (not required)
 
