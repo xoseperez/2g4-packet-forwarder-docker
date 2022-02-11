@@ -1,2 +1,2 @@
 #!/usr/bin/env bash 
-cat local_conf.json | jq '.gateway_conf.gateway_ID' | sed 's/"//g'
+/app/chip_id -d ${DEVICE:-"/dev/ttyACM0"} | grep "concentrator EUI" | sed "s/.*0x//"

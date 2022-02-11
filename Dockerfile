@@ -42,6 +42,7 @@ WORKDIR /app
 # Copy fles from builder and repo
 COPY --from=builder /app/repo/packet_forwarder/lora_pkt_fwd /app/lora_pkt_fwd
 COPY --from=builder /app/repo/packet_forwarder/global_conf.json /app/global_conf.json
+COPY --from=builder /app/repo/util_chip_id/chip_id /app/chip_id
 COPY runner/*.sh ./
 RUN chmod +x *.sh
 
