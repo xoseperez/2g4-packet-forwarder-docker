@@ -21,7 +21,7 @@ services:
     #volumes:
     #  - ./global_conf.json:/app/global_conf.json:ro
     
-    environment:
+    #environment:
       
       # If you have the concentrator connected to a different port you can define it this way
       #DEVICE: "/dev/ttyS0"

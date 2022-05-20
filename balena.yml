@@ -1,30 +1,20 @@
 name: 2g4-packet-forwarder
-description: >-
-  This project deploys a LoRaWAN gateway with UDP Packet Forwarder protocol using Docker for 2.4GHz LoRaWAN Gateways. It runs on an amd86 PC, Raspberry Pi 3/4, Compute Module 3/4 or balenaFin.
-fleetcta: Add LoRaWAN module
-joinable: false
-post-provisioning: >-
-  Read correct config in the repo README - https://github.com/xoseperez/2g4-packet-forwarder
 type: sw.application
+description: This project deploys a LoRaWAN gateway with UDP Packet Forwarder protocol using Docker for 2.4GHz LoRaWAN Gateways. It runs on an amd86 PC, Raspberry Pi 3/4, Compute Module 3/4 or balenaFin.
+joinable: false
+post-provisioning: Read correct config in the repo [README](https://github.com/xoseperez/2g4-packet-forwarder)
 assets:
   repository:
     type: blob.asset
     data:
-      url: 'https://github.com/xoseperez/2g4-packet-forwarder'
+      url: https://github.com/xoseperez/2g4-packet-forwarder
+  logo:
+    type: blob.asset
+    data:
+      url: https://raw.githubusercontent.com/xoseperez/2g4-packet-forwarder/master/logo.png
 data:
-  applicationConfigVariables:
-    - BALENA_HOST_CONFIG_dtoverlay: '"disable-bt"'
-    - BALENA_HOST_CONFIG_enable_uart: 1
   applicationEnvironmentVariables:
-    - DEVICE: "/dev/ttyACM0"
-    - GATEWAY_EUI_NIC: "eth0"
-    - GATEWAY_EUI: ""
-    - TTN_REGION: "eu1"
-    - SERVER_HOST: ""
-    - SERVER_PORT: 1700
-    #- GPS_LATITUDE: 0
-    #- GPS_LONGITUDE: 0
-    #- GPS_ALTITUDE: 0
+    - DEVICE: /dev/ttyACM0
   defaultDeviceType: raspberrypi4-64
   supportedDeviceTypes:
     - generic
@@ -35,4 +25,4 @@ data:
     - raspberrypi3-64
     - raspberrypi400-64
     - raspberrypicm4-ioboard
-version: 1.0.0
+version: 1.0.1

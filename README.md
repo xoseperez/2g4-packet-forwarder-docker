@@ -179,8 +179,8 @@ services:
     image: xoseperez/2g4-packet-forwarder:latest
     container_name: 2g4-packet-forwarder
     restart: unless-stopped
-    privileged: true
-    network_mode: host
+    devices:
+      - /dev/ttyACM0
     volumes:
       - ./global_conf.json:/app/global_conf.json:ro
 ```
