@@ -1,2 +1,2 @@
 #!/usr/bin/env bash 
-/app/chip_id -d ${DEVICE:-"/dev/ttyACM0"} | grep "concentrator EUI" | sed "s/.*0x//"
+cat global_conf.json | grep gateway_ID | sed 's/[",]//g' | awk {'print $2'}

@@ -138,6 +138,8 @@ These variables you can set them under the `environment` tag in the `docker-comp
 Variable Name | Value | Description | Default
 ------------ | ------------- | ------------- | -------------
 **`DEVICE`** | `STRING` | Where the concentrator is connected to. | `/dev/ttyACM0`
+**`GATEWAY_EUI`** | `STRING` | The gateway EUI to use | Defaults to one based on the concentrator Chip ID
+**`GATEWAY_EUI_NIC`** | `STRING` | Get the Gateway EUI from the MAC of the given interface | 
 **`TTN_REGION`** | `STRING` | If using a TTN server, region of the TTN server to use | `eu1`
 **`SERVER_HOST`** | `STRING` | URL of the server | If `TTN_REGION` is defined it will build the right address for the TTN server
 **`SERVER_PORT`** | `INT` | Port the server is listening to | 1700

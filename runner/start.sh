@@ -45,7 +45,14 @@ DEVICE=${DEVICE:-"/dev/ttyACM0"}
 # Gateway EUI
 # -----------------------------------------------------------------------------
 
-GATEWAY_EUI=$(/app/chip_id -d $DEVICE | grep "concentrator EUI" | sed "s/.*0x//")
+# Get the Gateway EUI
+if [[ $GATEWAY_EUI_NIC != "" ]]; then
+    if [[ `grep "$GATEWAY_EUI_NIC" /proc/net/dev` != "" ]]; then
+        GATEWAY_EUI=${GATEWAY_EUI:-$(ip link show $GATEWAY_EUI_NIC | awk '/ether/ {print $2}' | awk -F\: '{print $1$2$3"FFFE"$4$5$6}')}
+    fi
+fi
+GATEWAY_EUI=${GATEWAY_EUI:-$(/app/chip_id -d $DEVICE | grep "concentrator EUI" | sed "s/.*0x//")}
+GATEWAY_EUI=${GATEWAY_EUI^^}
 
 # -----------------------------------------------------------------------------
 # Debug

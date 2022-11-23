@@ -12,8 +12,12 @@ services:
     #  args:
     #    ARCH: aarch64
 
+    #network_mode: host
+    #privileged: true
+
     container_name: 2g4-packet-forwarder
     restart: unless-stopped
+
     devices:
       - /dev/ttyACM0
       #- /dev/ttyUSB0:/dev/ttyACM0
@@ -25,6 +29,14 @@ services:
       
       # If you have the concentrator connected to a different port you can define it this way
       #DEVICE: "/dev/ttyS0"
+
+      # The service will define the Gateway EUI based on the LoRaWAN concentrator by default.
+      # If a GATEWAY_EUI_NIC is defined it will read it from the corresponding NIC instead: eth0, wlan0 or usb0.
+      # Requires network_mode=host to keep same EUI across reboots.
+      #GATEWAY_EUI_NIC: "eth1"
+
+      # Or, you can also set a custom Gateway EUI (8 bytes in hex format)
+      #GATEWAY_EUI: "1122334455667788"
 
       # The default LNS server is the European TTN server. 
       # If you still want to use TTN but a different region you can set it this way:
