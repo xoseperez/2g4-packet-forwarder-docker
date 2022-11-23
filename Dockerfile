@@ -1,5 +1,6 @@
 ARG ARCH
 ARG TAG
+ARG VERSION
 ARG BUILD_DATE
 
 # Builder image
@@ -18,23 +19,26 @@ RUN ARCH=${ARCH} ./build.sh
 FROM balenalib/${ARCH}-debian:buster-run as runner
 ARG ARCH
 ARG TAG
+ARG VERSION
 ARG BUILD_DATE
 
 # Image metadata
-LABEL maintainer="xose.perez@gmail.com"
-LABEL authors="xose.perez@gmail.com"
+LABEL maintainer="Xose Pérez <xose.perez@gmail.com>"
+LABEL authors="Xose Pérez <xose.perez@gmail.com>"
 LABEL org.label-schema.schema-version="1.0"
 LABEL org.label-schema.build-date=${BUILD_DATE}
 LABEL org.label-schema.name="2.4GHz Packet Forwarder"
+LABEL org.label-schema.version="${VERSION}"
 LABEL org.label-schema.description="LoRaWAN UDP Packet Forwarder for 2.4GHz Gateways"
 LABEL org.label-schema.vcs-type="Git"
 LABEL org.label-schema.vcs-url="https://github.com/xoseperez/2g4-packet-forwarder"
 LABEL org.label-schema.vcs-ref=${TAG}
 LABEL org.label-schema.arch=${ARCH}
 LABEL org.label-schema.license="BSD License 2.0"
+LABEL io.balena.features.balena-api="1"
 
 # Install required runtime packages
-RUN install_packages jq vim
+RUN install_packages jq vim gpiod
 
 # Switch to working directory for our app
 WORKDIR /app
